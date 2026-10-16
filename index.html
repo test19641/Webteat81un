@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Permissions-Policy" content="camera=(self), microphone=(), geolocation=()">
+<meta name="color-scheme" content="dark">
+<title>Test | Web by Iman</title>
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="description" content="Test web experience by Iman">
+<meta name="referrer" content="no-referrer">
+<style>
+:root{--cyan:#70faff;--red:#ff335b}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020207;color:#eafcff;font-family:Inter,Segoe UI,Arial,sans-serif}#scene{position:fixed;inset:0}canvas{display:block}.grain{pointer-events:none;position:fixed;inset:0;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E")}.top{position:fixed;top:24px;left:0;right:0;text-align:center;pointer-events:none}.title{font-family:Georgia,serif;letter-spacing:.28em;font-size:clamp(17px,2.4vw,29px);text-shadow:0 0 20px #fff8}.sub{margin-top:8px;font-size:10px;letter-spacing:.35em;color:var(--cyan)}.hud{position:fixed;left:22px;top:22px;font-size:10px;letter-spacing:.12em;color:#a9b5c9;line-height:1.8}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff405c;margin-right:7px;box-shadow:0 0 12px currentColor}.camera{position:fixed;bottom:22px;left:22px;width:clamp(110px,15vw,180px);aspect-ratio:3/4;border:1px solid #ffffff35;border-radius:12px;overflow:hidden;background:#0a0a10;box-shadow:0 0 30px #0008}.camera video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}.camlabel{position:absolute;left:8px;top:8px;background:#05050ac9;padding:5px 7px;border-radius:4px;font-size:9px;letter-spacing:.12em}.panel{position:fixed;right:22px;bottom:22px;max-width:255px;padding:14px 16px;border:1px solid #9bfaff36;background:#070912b8;backdrop-filter:blur(12px);border-radius:12px}.panel h3{font-size:10px;letter-spacing:.2em;color:var(--cyan);margin:0 0 9px}.panel p{font-size:11px;color:#aab4c8;line-height:1.65;margin:4px 0}.panel b{color:#fff;font-weight:600}.btn{cursor:pointer;color:#efffff;background:#0b171e;border:1px solid #70faff70;border-radius:7px;padding:10px 13px;font-weight:700;font-size:10px;letter-spacing:.1em}.btn:hover{background:#102a32}.start{position:fixed;inset:0;display:grid;place-items:center;background:radial-gradient(ellipse at center,#15152aeb,#020207f5);z-index:5}.startbox{width:min(440px,90vw);padding:30px;text-align:center;border:1px solid #70faff45;border-radius:18px;background:#080a13d9;box-shadow:0 0 80px #233b7040}.startbox h1{font:26px Georgia,serif;letter-spacing:.15em;margin:0 0 12px}.startbox p{font-size:12px;line-height:1.8;color:#aab4c8;margin:0 0 20px}.startbox .btn{font-size:18px;padding:14px 18px;min-width:58px}.start-symbol{font-size:42px;color:var(--cyan);margin:8px 0 18px;text-shadow:0 0 24px currentColor}.status{font-size:10px;color:#8d9ab2;margin-top:13px}.flash{position:fixed;inset:0;pointer-events:none;background:white;opacity:0;transition:opacity .12s}.hidden{display:none!important}@media(max-width:600px){.hud{top:85px;left:12px}.camera{left:12px;bottom:12px;width:105px}.panel{right:12px;bottom:12px;max-width:205px;padding:10px}.top{top:20px}}
+ 
+.panel{max-height:58vh;overflow-y:auto;backdrop-filter:blur(16px)}
+.rankBar{display:flex;justify-content:space-between;gap:8px;padding:8px 9px;border:1px solid #70faff35;border-radius:8px;color:#70faff;font-size:9px;letter-spacing:.08em;background:#70faff09;margin-top:10px}.gestureList{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+.gestureItem{cursor:pointer;user-select:none;display:grid;grid-template-columns:30px 1fr auto;gap:9px;align-items:center;padding:9px 10px;border:1px solid #ffffff12;border-radius:9px;background:#ffffff04;transition:.18s}
+.gestureItem:hover{border-color:#70faff80;background:#70faff0c;transform:translateX(-2px)}
+.gestureItem.active{border-color:var(--cyan);background:color-mix(in srgb,var(--cyan) 10%,transparent);box-shadow:inset 2px 0 var(--cyan),0 0 18px color-mix(in srgb,var(--cyan) 10%,transparent)}
+.gestureIcon{display:grid;place-items:center;width:28px;height:28px;color:var(--cyan);filter:drop-shadow(0 0 7px #70faff55)}.gestureIcon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}.gestureItem small{display:none!important}.gestureItem kbd{display:grid;place-items:center;width:24px;height:24px;padding:0;border-radius:50%;font-size:0;border:1px solid #70faff35;background:#70faff08}.gestureItem kbd:after{content:"✦";font-size:12px;color:var(--cyan)}.gestureItem{grid-template-columns:30px 1fr 24px;min-height:45px}.gestureItem b{font-size:10px;letter-spacing:.09em}
+.gestureItem b{display:block;font-size:10px;letter-spacing:.1em;color:#effcff}
+.gestureItem small{display:block;font-size:10px;color:#9fb4c9;margin-top:3px}
+.gestureItem kbd{font:9px Inter,Arial,sans-serif;color:#8c9db3;border:1px solid #ffffff18;border-radius:5px;padding:4px 5px;white-space:nowrap}
+.liveTag{font-size:8px;color:#70faff;border:1px solid #70faff55;border-radius:4px;padding:3px 5px;vertical-align:middle}
+.panelHint{display:none!important}
+@media(max-width:700px){.panel{right:10px!important;left:10px!important;bottom:10px!important;width:auto!important;max-height:45vh}.gestureItem{padding:6px 8px}.gestureItem kbd{font-size:8px}}
+
+/* V10: minimal icon-only surface */
+.top{top:16px}.title{font-family:Inter,Segoe UI,Arial,sans-serif;font-weight:800;letter-spacing:.35em;font-size:clamp(15px,2vw,22px)}
+.sub{letter-spacing:.24em;font-size:9px;margin-top:6px}
+.hud{display:none!important}.camera{width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;border:0!important;box-shadow:none!important;left:0!important;bottom:0!important}.camera video{width:1px!important;height:1px!important}
+.panel{left:50%;right:auto;bottom:18px;transform:translateX(-50%);width:min(520px,92vw);max-width:none;max-height:34vh;padding:10px;background:#0709129c}
+.panel h3,.rankBar,.panelHint{display:none!important}.gestureList{display:grid;grid-template-columns:repeat(8,minmax(34px,1fr));gap:7px;margin:0}.gestureItem{display:flex;justify-content:center;align-items:center;min-height:42px;padding:6px;border-radius:10px;grid-template-columns:1fr!important;gap:0}.gestureItem b,.gestureItem small,.gestureItem kbd{display:none!important}.gestureIcon{width:30px;height:30px}.gestureIcon svg{width:25px;height:25px}.gestureItem.active{box-shadow:0 0 18px color-mix(in srgb,var(--cyan) 22%,transparent)}
+.startbox h1{letter-spacing:.35em}.startbox .sub{margin-bottom:16px}.status{font-size:11px;line-height:1.7;min-height:8px;overflow-wrap:anywhere}
+@media(max-width:600px){.panel{left:8px;right:8px;bottom:8px;transform:none;width:auto;max-height:30vh}.gestureList{grid-template-columns:repeat(6,minmax(32px,1fr));gap:5px}.gestureItem{min-height:38px;padding:4px}.top{top:12px}}
+
+</style>
+<style>
+/* V12: icon-only presentation. Keep status nodes in the DOM for the app logic, but do not display verbose HUD/camera overlays. */
+.hud,.panelHint,.rankBar,.panel h3{display:none!important}
+.camera{display:block!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+body.camera-active .camera{width:clamp(110px,15vw,180px)!important;height:auto!important;aspect-ratio:3/4!important;opacity:1!important;left:16px!important;bottom:16px!important;border:1px solid #70faff70!important;z-index:4!important}
+body.camera-active .camera video{width:100%!important;height:100%!important}
+@media(max-width:600px){body.camera-active .camera{width:92px!important;left:8px!important;bottom:8px!important}}
+.gestureItem{display:flex;align-items:center;justify-content:center;gap:0;min-height:48px;min-width:48px;padding:9px;cursor:pointer;}
+.gestureItem>span:not(.gestureIcon),.gestureItem b,.gestureItem kbd{display:none!important}
+.gestureIcon{display:flex!important;align-items:center;justify-content:center;width:28px;height:28px;flex:0 0 28px}
+.gestureIcon svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+#gesturePanel{max-width:min(310px,calc(100vw - 24px));max-height:calc(100vh - 110px);overflow:auto;padding:10px;}
+.gestureList{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.gestureItem:focus-visible,#enable:focus-visible,#stopcamera:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.startstatus{font-size:11px;line-height:1.6;max-width:320px;margin:12px auto 0;color:#aab4c8;overflow-wrap:anywhere}
+@media(max-width:600px){.top{top:14px}.panel{right:12px;bottom:12px;max-width:calc(100vw - 24px)}#gesturePanel{max-width:calc(100vw - 24px)}.gestureList{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}.gestureItem{min-width:40px;min-height:42px;padding:6px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div id="scene"></div><div class="grain"></div><div class="flash" id="flash"></div>
+<header class="top"><div class="title">TEST</div><div class="sub">WEB BY IMAN</div></header>
+<div class="hud"><div><span class="dot" id="camdot"></span><span id="camstatus">CAMERA OFFLINE</span></div><div>TRACKING: <span id="tracking">WAITING</span></div><div>TECHNIQUE: <span id="tech">IDLE</span></div></div>
+<div class="camera"><video id="video" autoplay muted playsinline></video><div class="camlabel" title="Live hand tracking" aria-label="Live hand tracking">◉</div><button class="btn" id="stopcamera" type="button" style="position:absolute;left:8px;bottom:8px;padding:7px 9px;z-index:2" hidden aria-label="Stop camera" title="Stop camera">◼</button></div>
+<div class="panel" id="gesturePanel"><h3 aria-label="Cursed techniques"><span class="liveTag" title="Rank system" aria-label="Rank system">✦</span></h3>
+<div class="rankBar" aria-label="Technique status"><span id="rankName" title="Current rank" aria-label="Current rank">✦</span><span id="comboName" title="Current technique" aria-label="Current technique">◈</span></div>
+<div class="gestureList" id="gestureList">
+<div class="gestureItem active" data-mode="domain"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9 4.9 19.1"/><circle cx="12" cy="12" r="8"/></svg></span><span><b>CRIMSON DOMAIN</b></span><kbd title="GRADE S" aria-label="GRADE S">GRADE S</kbd></div>
+<div class="gestureItem" data-mode="ring"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="5"/><circle cx="16" cy="12" r="5"/></svg></span><span><b>INFINITY RING</b></span><kbd title="GRADE A" aria-label="GRADE A">GRADE A</kbd></div>
+<div class="gestureItem" data-mode="collapse"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l6 6M20 4l-6 6M4 20l6-6M20 20l-6-6"/><circle cx="12" cy="12" r="3"/></svg></span><span><b>RED GATE</b></span><kbd title="GRADE B" aria-label="GRADE B">GRADE B</kbd></div>
+<div class="gestureItem" data-mode="core"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 20 7v10l-8 5-8-5V7z"/><circle cx="12" cy="12" r="3"/></svg></span><span><b>CURSED CORE</b></span><kbd title="GRADE S" aria-label="GRADE S">GRADE S</kbd></div>
+<div class="gestureItem" data-mode="void"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M6 9l6-6 6 6"/><circle cx="12" cy="15" r="4"/></svg></span><span><b>VOID SPIRAL</b></span><kbd title="GRADE A" aria-label="GRADE A">GRADE A</kbd></div>
+<div class="gestureItem" data-mode="burst"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 6.4L21 6l-3.4 6 4.4 3.3-7 .4L12 22l-3-6.3-6.8.1 4-4.8L3 5.5l6.5 2z"/></svg></span><span><b>CRIMSON BURST</b></span><kbd title="GRADE A" aria-label="GRADE A">GRADE A</kbd></div>
+<div class="gestureItem" data-mode="wave"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13V7a1.5 1.5 0 0 1 3 0v4-7a1.5 1.5 0 0 1 3 0v7-8a1.5 1.5 0 0 1 3 0v8-6a1.5 1.5 0 0 1 3 0v7l2-3a1.7 1.7 0 0 1 3 1l-3 7a5 5 0 0 1-5 3H9a5 5 0 0 1-4-3z"/></svg></span><span><b>STARFALL</b></span><kbd title="GRADE C" aria-label="GRADE C">GRADE C</kbd></div>
+<div class="gestureItem" data-mode="orbit"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-35 12 12)"/><circle cx="12" cy="12" r="2"/></svg></span><span><b>BLUE ORBIT</b></span><kbd title="GRADE A" aria-label="GRADE A">GRADE A</kbd></div>
+<div class="gestureItem" data-mode="lightning"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 5 14h6l-1 8 9-13h-6z"/></svg></span><span><b>VIOLET LIGHTNING</b></span><kbd title="GRADE B" aria-label="GRADE B">GRADE B</kbd></div>
+<div class="gestureItem" data-mode="phoenix"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c-7 0-9-7-4-11 0 4 2 4 3 5-1-6 4-7 4-13 7 7 9 16-3 19z"/></svg></span><span><b>PHOENIX FLARE</b></span><kbd title="GRADE B" aria-label="GRADE B">GRADE B</kbd></div>
+<div class="gestureItem" data-mode="vortex"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9c0-5-6-7-9-3-2 3 1 5 3 3"/><path d="M12 7a5 5 0 1 0 5 5"/></svg></span><span><b>BLACK VORTEX</b></span><kbd title="GRADE S" aria-label="GRADE S">GRADE S</kbd></div>
+<div class="gestureItem" data-mode="nova"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-3.5z"/></svg></span><span><b>STAR NOVA</b></span><kbd title="GRADE A" aria-label="GRADE A">GRADE A</kbd></div>
+<div class="gestureItem" data-mode="shield"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 21 6v6c0 5-4 8-9 10-5-2-9-5-9-10V6z"/><path d="m8 12 3 3 5-6"/></svg></span><span><b>CURSED SHIELD</b></span><kbd title="GRADE C" aria-label="GRADE C">GRADE C</kbd></div>
+<div class="gestureItem" data-mode="comet"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3a7 7 0 0 0 7 7L10 21l-7-7z"/><path d="M2 8l5 1M5 3l2 3"/></svg></span><span><b>COMET TRAIL</b></span><kbd title="GRADE B" aria-label="GRADE B">GRADE B</kbd></div>
+<div class="gestureItem" data-mode="eclipse"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M17 4a8 8 0 0 0 0 16"/></svg></span><span><b>RED ECLIPSE</b></span><kbd title="GRADE S" aria-label="GRADE S">GRADE S</kbd></div>
+<div class="gestureItem" data-mode="prism"><span class="gestureIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 10 18H2z"/><path d="m12 2 1 18M2 20l11-7 9 7"/></svg></span><span><b>PRISM SHARDS</b></span><kbd title="GRADE A" aria-label="GRADE A">GRADE A</kbd></div>
+</div><p class="panelHint">روی هر تکنیک کلیک کن تا همان افکت فوراً اجرا شود؛ بعد با حرکت دست جابه‌جایش کن. ژست دست هم همچنان تکنیک‌ها را فعال می‌کند. افکت پس از تشخیص قفل می‌ماند و با گم‌شدن لحظه‌ای دست خاموش نمی‌شود. ژست جدید را حدود ۰٫۳ ثانیه نگه دار. حرکت سریع چپ/راست، بالا و پایین هم افکت جدا فعال می‌کند.</p></div>
+<div class="start" id="start"><div class="startbox"><h1>TEST</h1><div class="sub">WEB BY IMAN</div><div class="start-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" width="42" height="42"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></div><button class="btn" id="enable" aria-label="Enable camera" title="Enable camera"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M4 7h3l2-2h6l2 2h3v12H4z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></button><div class="status" id="startstatus" aria-live="polite" aria-label="Camera permission status">برای شروع، روی آیکون دوربین بزن و اجازه دسترسی را تأیید کن.</div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+// Test | Web by Iman. Client-side code is public by design.
+(()=>{
+const statusNode=document.getElementById('startstatus');
+if(!window.THREE){
+ // Keep the camera button responsive even if the visual library CDN fails.
+ // This fallback requests camera access directly from the user's click, then stops it safely.
+ const enableFallback=document.getElementById('enable');
+ if(statusNode)statusNode.textContent='کتابخانه گرافیکی بارگذاری نشد. اینترنت را بررسی کن.';
+ if(enableFallback) enableFallback.addEventListener('click',async()=>{
+   try{
+     if(!window.isSecureContext || !navigator.mediaDevices?.getUserMedia){
+       throw new Error('SECURE_CONTEXT');
+     }
+     if(statusNode) statusNode.textContent='درخواست اجازه دوربین...';
+     const testStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});
+     testStream.getTracks().forEach(track=>track.stop());
+     if(statusNode) statusNode.textContent='اجازه دوربین فعال است، اما کتابخانه گرافیکی بارگذاری نشده. اینترنت را بررسی و صفحه را تازه‌سازی کن.';
+   }catch(err){
+     const messages={
+       SECURE_CONTEXT:'مرورگر اجازه دوربین را در این حالت نمی‌دهد. فایل را در Chrome باز کن و تنظیمات Camera را بررسی کن؛ اگر باز هم مسدود بود، باید از localhost یا HTTPS استفاده شود.',
+       NotAllowedError:'اجازه دوربین رد شده یا مسدود است. کنار آدرس سایت روی قفل/تنظیمات سایت بزن و Camera را روی Allow قرار بده.',
+       NotFoundError:'هیچ دوربینی پیدا نشد. اتصال دوربین را بررسی کن.',
+       NotReadableError:'دوربین توسط برنامه دیگری استفاده می‌شود. برنامه‌های دیگرِ استفاده‌کننده از دوربین را ببند.',
+       OverconstrainedError:'تنظیمات دوربین پشتیبانی نمی‌شود. دوربین دیگری را امتحان کن.',
+       SecurityError:'مرورگر به دلایل امنیتی دسترسی دوربین را مسدود کرده است.'
+     };
+     if(statusNode) statusNode.textContent=messages[err?.name]||messages[err?.message]||'دسترسی دوربین انجام نشد. در تنظیمات مرورگر، اجازه Camera را فعال کن.';
+   }
+ });
+ return;
+}
+const root=document.getElementById('scene'), video=document.getElementById('video');
+let activeStream=null, activeCamera=null, activeHands=null;
+const scene=new THREE.Scene(); scene.fog=new THREE.FogExp2(0x020207,.018);
+const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,1000); camera.position.set(0,0,42);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false}); renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth,innerHeight); renderer.setClearColor(0x020207,1); root.appendChild(renderer.domElement);
+const N=26000, geo=new THREE.BufferGeometry(), positions=new Float32Array(N*3), targets=new Float32Array(N*3), colors=new Float32Array(N*3), sizes=new Float32Array(N);
+for(let i=0;i<N;i++){let a=Math.random()*Math.PI*2,r=5+Math.random()*20;positions[i*3]=Math.cos(a)*r;positions[i*3+1]=(Math.random()-.5)*20;positions[i*3+2]=(Math.random()-.5)*22;targets.set(positions.slice(i*3,i*3+3),i*3);let c=new THREE.Color(); if(Math.random()<.22)c.setHSL(.91+Math.random()*.06,.9,.65+Math.random()*.3); else c.setHSL(.52+Math.random()*.08,.72,.55+Math.random()*.4);colors.set([c.r,c.g,c.b],i*3);sizes[i]=Math.random()*.8+.25;}
+geo.setAttribute('position',new THREE.BufferAttribute(positions,3));geo.setAttribute('color',new THREE.BufferAttribute(colors,3));
+const mat=new THREE.PointsMaterial({size:.205,vertexColors:true,transparent:true,opacity:.92,blending:THREE.AdditiveBlending,depthWrite:false});const points=new THREE.Points(geo,mat);scene.add(points);
+const ringMat=new THREE.MeshBasicMaterial({color:0x8dfcff,transparent:true,opacity:.9,blending:THREE.AdditiveBlending});const ring=new THREE.Mesh(new THREE.TorusGeometry(7,.11,8,180),ringMat);ring.visible=false;scene.add(ring);
+const ring2=new THREE.Mesh(new THREE.TorusGeometry(9,.045,6,180),new THREE.MeshBasicMaterial({color:0xff335b,transparent:true,opacity:.8,blending:THREE.AdditiveBlending}));ring2.visible=false;scene.add(ring2);
+const core=new THREE.Mesh(new THREE.IcosahedronGeometry(1.8,2),new THREE.MeshBasicMaterial({color:0xffffff,wireframe:true,transparent:true,opacity:.75}));core.visible=false;scene.add(core);
+// Extra luminous layers matching the reference's white-pink halo and crimson rings.
+const halo=new THREE.Mesh(new THREE.TorusGeometry(7,.34,12,220),new THREE.MeshBasicMaterial({color:0xffd7f2,transparent:true,opacity:.22,blending:THREE.AdditiveBlending,depthWrite:false}));halo.visible=false;scene.add(halo);
+const extraRings=[];for(let j=0;j<6;j++){const rm=new THREE.MeshBasicMaterial({color:0xff173f,transparent:true,opacity:.72-j*.055,blending:THREE.AdditiveBlending,depthWrite:false});const rr=new THREE.Mesh(new THREE.TorusGeometry(2.35+j*1.38,.055+(j%2)*.025,8,220),rm);rr.visible=false;extraRings.push(rr);scene.add(rr);}
+const coreGlow=new THREE.Mesh(new THREE.SphereGeometry(2.15,24,24),new THREE.MeshBasicMaterial({color:0xff3a57,transparent:true,opacity:.12,blending:THREE.AdditiveBlending,depthWrite:false}));coreGlow.visible=false;scene.add(coreGlow);
+const blueHalo=new THREE.Mesh(new THREE.TorusGeometry(1.05,.12,10,160),new THREE.MeshBasicMaterial({color:0x78eaff,transparent:true,opacity:.8,blending:THREE.AdditiveBlending,depthWrite:false}));blueHalo.visible=false;scene.add(blueHalo);
+
+// Red torii-like cursed gate, built from glowing beams to match the reference video.
+const gate=new THREE.Group();
+const gateMat=new THREE.MeshBasicMaterial({color:0xff304e,transparent:true,opacity:.9,blending:THREE.AdditiveBlending});
+function beam(w,h,d,x,y,z){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),gateMat);m.position.set(x,y,z);gate.add(m);return m;}
+beam(18,.34,.42,0,5.7,0); beam(15,.28,.36,0,4.65,0); beam(.3,5.3,.4,-5.1,2.1,0); beam(.3,5.3,.4,5.1,2.1,0);
+gate.visible=false;scene.add(gate);
+let mode='idle',modeSince=0,handX=0,handY=0,handSeen=false,lastGesture='',lastChange=0,lastHandAt=0,stableGesture='idle',stableSince=0,lastHandX=.5,lastHandY=.5,moveSpeed=0;
+function setMode(m){if(m===mode)return;mode=m;modeSince=performance.now();document.getElementById('tech').textContent=({idle:'IDLE',domain:'CRIMSON DOMAIN',ring:'INFINITY RING',collapse:'RED GATE',core:'CURSED CORE',void:'VOID SPIRAL',burst:'CRIMSON BURST',wave:'STARFALL',orbit:'BLUE ORBIT',lightning:'VIOLET LIGHTNING',phoenix:'PHOENIX FLARE',vortex:'BLACK VORTEX',nova:'STAR NOVA',shield:'CURSED SHIELD',comet:'COMET TRAIL',eclipse:'RED ECLIPSE',prism:'PRISM SHARDS'})[m]||m.toUpperCase();
+document.querySelectorAll('.gestureItem').forEach(el=>el.classList.toggle('active',el.dataset.mode===m));
+const activeCard=document.querySelector('.gestureItem[data-mode="'+m+'"]');
+document.getElementById('comboName').textContent='TECHNIQUE: '+(activeCard?activeCard.querySelector('b').textContent:m.toUpperCase());
+document.getElementById('rankName').textContent='RANK: '+(activeCard?activeCard.querySelector('kbd').textContent:'IDLE');document.getElementById('flash').style.opacity=m==='domain'?'0.28':'0';setTimeout(()=>document.getElementById('flash').style.opacity='0',100);}
+function targetFor(i,m,t){let a=i/N*Math.PI*2,u=Math.random(),r;
+ if(m==='domain'){ // concentric red rings around a bright center
+   let band=i%10, rr=1.65+band*1.02+(Math.random()-.5)*.22, aa=(i*2.399963)+t*.18;
+   return [Math.cos(aa)*rr,Math.sin(aa)*rr,(Math.random()-.5)*.75];
+ }
+ if(m==='ring'){ // bright white ring suspended in a dense star field
+   if(Math.random()<.84){let aa=i*2.399963+t*.04, rr=7+(Math.random()-.5)*.16;return [Math.cos(aa)*rr,Math.sin(aa)*rr,(Math.random()-.5)*.5];}
+   let aa=Math.random()*Math.PI*2, rr=7.5+Math.random()*22;return [Math.cos(aa)*rr,(Math.random()-.5)*25,Math.sin(aa)*rr*.72];
+ }
+ if(m==='collapse'){ // red torii silhouette with particles falling into a horizon
+   if(i%3===0){let side=Math.random()<.5?-1:1;return [side*(4.9+(Math.random()-.5)*.22),Math.random()*5-1,(Math.random()-.5)*.3];}
+   if(i%3===1){return [(Math.random()-.5)*18,4.8+Math.random()*1.2,(Math.random()-.5)*.3];}
+   return [(Math.random()-.5)*34,-7-Math.random()*5,(Math.random()-.5)*8];
+ }
+ if(m==='core'){let rr=Math.random()*3.1;return [Math.cos(a)*rr,Math.sin(a)*rr,(Math.random()-.5)*2];}
+ if(m==='void'){let rr=.4+(i/N)*12, aa=i*.13;return [Math.cos(aa)*rr,Math.sin(aa)*rr,(Math.random()-.5)*2];}
+ if(m==='burst'){let aa=i*2.399963, rr=Math.pow(Math.random(),.35)*18;return [Math.cos(aa)*rr,Math.sin(aa)*rr,(Math.random()-.5)*5];}
+ if(m==='wave'){let aa=i*.19, rr=4+(i/N)*16;return [Math.cos(aa)*rr,Math.sin(aa)*rr*.7,Math.sin(aa*2)*2];}
+ if(m==='orbit'){let aa=i*.09, rr=5+(i%7)*.55;return [Math.cos(aa)*rr,Math.sin(aa)*rr,(Math.sin(aa*1.7))*3];}
+ if(m==='lightning'){let step=Math.floor(i/90)%2, y=((i%90)/90)*20-10, x=(step?1:-1)*(Math.sin(y*2.3)*3+Math.sin(y*5)*.7);return [x,y,(Math.random()-.5)*2];}
+ if(m==='phoenix'){let aa=i*.11, rr=2+(i/N)*15, y=Math.sin(aa*2)*rr*.55;return [Math.cos(aa)*rr,y+Math.random()*2,Math.sin(aa)*rr*.45];}
+ if(m==='vortex'){let aa=i*.15, rr=.25+(i/N)*15;return [Math.cos(aa)*rr,Math.sin(aa)*rr,(i/N-.5)*12];}
+ if(m==='nova'){let aa=i*2.399963, rr=Math.pow(Math.random(),.45)*19;return [Math.cos(aa)*rr,Math.sin(aa)*rr,(Math.random()-.5)*9];}
+ if(m==='shield'){let aa=i*.035, rr=8+Math.sin(aa*5)*.8;return [Math.cos(aa)*rr,Math.sin(aa)*rr,(Math.random()-.5)*1.4];}
+ if(m==='comet'){let q=(i/N), rr=2+q*20;return [rr-10,Math.sin(q*18)*2,(Math.random()-.5)*2];}
+ if(m==='eclipse'){let aa=i*.08, rr=7+(i%5)*.18;return [Math.cos(aa)*rr,Math.sin(aa)*rr,(Math.random()-.5)*1.2];}
+ if(m==='prism'){let aa=i*2.399963, rr=3+(i%6)*1.5;return [Math.cos(aa)*rr,Math.sin(aa)*rr,(Math.random()-.5)*5];}
+ let aa=Math.random()*Math.PI*2;rr=7+Math.random()*19;return [Math.cos(aa)*rr,(Math.random()-.5)*17,Math.sin(aa)*rr];}
+const techniquePalette={idle:[0x70faff,0x8dfcff],domain:[0xff234f,0xff6b8c],ring:[0xf7f0ff,0xffa9e8],collapse:[0xff303e,0xff7b36],core:[0x36cfff,0x9d75ff],void:[0x9a67ff,0x4e3cff],burst:[0xff304e,0xffb52e],wave:[0x70faff,0xffffff],orbit:[0x148bff,0x70faff],lightning:[0xb16cff,0x66eaff],phoenix:[0xffb347,0xff4d1c],vortex:[0x24113f,0x8d37ff],nova:[0xffe6a1,0xffffff],shield:[0x70faff,0x2e77ff],comet:[0xff784f,0xffd166],eclipse:[0xff174f,0x7a1cff],prism:[0x9e8cff,0x52f5ff]};
+function recolorParticles(m){const pair=techniquePalette[m]||techniquePalette.idle;const a=new THREE.Color(pair[0]),b=new THREE.Color(pair[1]);for(let i=0;i<N;i++){const c=(i%5===0)?b:a;const k=i*3;colors[k]=c.r;colors[k+1]=c.g;colors[k+2]=c.b;}geo.attributes.color.needsUpdate=true;const css='#'+pair[0].toString(16).padStart(6,'0');document.documentElement.style.setProperty('--cyan',css);}
+let oldMode='';function animate(now){requestAnimationFrame(animate);let t=now*.001;if(mode!==oldMode){oldMode=mode;recolorParticles(mode);for(let i=0;i<N;i++){const v=targetFor(i,mode,t);targets.set(v,i*3);} if(mode==='domain'){ring.visible=true;ring2.visible=true;core.visible=true;gate.visible=false;halo.visible=true;coreGlow.visible=true;blueHalo.visible=false;extraRings.forEach(r=>{r.visible=true;r.material.color.set(0xff173f);});ringMat.color.set(0xff3155);ring2.material.color.set(0xff3155);core.material.color.set(0xff304e);}else if(mode==='ring'){ring.visible=true;ring2.visible=false;core.visible=false;gate.visible=false;halo.visible=true;coreGlow.visible=false;blueHalo.visible=false;extraRings.forEach(r=>r.visible=false);ringMat.color.set(0xffffff);halo.material.color.set(0xffd7f2);}else if(mode==='core'){ring.visible=false;ring2.visible=false;core.visible=true;gate.visible=false;halo.visible=false;coreGlow.visible=true;blueHalo.visible=true;extraRings.forEach(r=>r.visible=false);core.material.color.set(0x70faff);coreGlow.material.color.set(0x70dfff);}else if(mode==='collapse'){ring.visible=false;ring2.visible=false;core.visible=true;gate.visible=true;halo.visible=false;coreGlow.visible=true;blueHalo.visible=true;extraRings.forEach(r=>r.visible=false);core.material.color.set(0x70faff);coreGlow.material.color.set(0xff304e);}else if(mode==='void'||mode==='burst'||mode==='wave'||mode==='orbit'){
+ ring.visible=mode==='orbit';ring2.visible=mode==='wave';core.visible=mode==='burst'||mode==='void';gate.visible=false;halo.visible=mode==='void'||mode==='wave';coreGlow.visible=mode==='burst';blueHalo.visible=mode==='orbit';extraRings.forEach(r=>{r.visible=mode==='burst';r.material.color.set(0xff173f);});
+ if(mode==='void'){core.material.color.set(0x9a67ff);ringMat.color.set(0x9a67ff);halo.material.color.set(0x9a67ff);}
+ if(mode==='burst'){core.material.color.set(0xff304e);ringMat.color.set(0xff304e);}
+ if(mode==='wave'){ringMat.color.set(0x70faff);ring2.material.color.set(0xffffff);halo.material.color.set(0x70faff);}
+ if(mode==='orbit'){ringMat.color.set(0x70faff);core.material.color.set(0x70faff);}
+}else if(['lightning','phoenix','vortex','nova','shield','comet','eclipse','prism'].includes(mode)){
+ ring.visible=['shield','eclipse'].includes(mode);ring2.visible=mode==='prism';core.visible=['nova','vortex','lightning'].includes(mode);gate.visible=mode==='comet';halo.visible=['phoenix','vortex','eclipse'].includes(mode);coreGlow.visible=['nova','phoenix'].includes(mode);blueHalo.visible=['shield','prism'].includes(mode);extraRings.forEach(r=>{r.visible=mode==='eclipse'||mode==='prism';r.material.color.set(mode==='eclipse'?0xff173f:0x70faff);});
+ const palette={lightning:0xb16cff,phoenix:0xffb347,vortex:0x161627,nova:0xffe6a1,shield:0x70faff,comet:0xff784f,eclipse:0xff174f,prism:0x9e8cff};const col=palette[mode]||0x70faff;core.material.color.set(col);coreGlow.material.color.set(col);ringMat.color.set(col);ring2.material.color.set(col);halo.material.color.set(col);blueHalo.material.color.set(col);
+}else{ring.visible=false;ring2.visible=false;core.visible=false;gate.visible=false;halo.visible=false;coreGlow.visible=false;blueHalo.visible=false;extraRings.forEach(r=>r.visible=false);}}
+let pos=geo.attributes.position.array;for(let i=0;i<N;i++){let k=i*3;let f=mode==='collapse'?.045:.025;pos[k]+=(targets[k]-pos[k])*f;pos[k+1]+=(targets[k+1]-pos[k+1])*f;pos[k+2]+=(targets[k+2]-pos[k+2])*f;let pulse=mode==='domain'?1+Math.sin(t*3+i*.04)*.025:1;pos[k]*=pulse;}
+geo.attributes.position.needsUpdate=true;points.rotation.y=Math.sin(t*.12)*.12+handX*.22;points.rotation.x=Math.sin(t*.17)*.08+handY*.1;points.rotation.z+=mode==='ring'?.002:.0004;ring.rotation.x=Math.sin(t*.7)*.4;ring.rotation.y=t*.35;halo.rotation.copy(ring.rotation);halo.scale.setScalar(1+Math.sin(t*2.2)*.045);extraRings.forEach((r,j)=>{r.rotation.x=Math.sin(t*.35+j*.11)*.12;r.rotation.y=-t*(.08+j*.025);r.scale.setScalar(1+Math.sin(t*2+j*.7)*.012);});coreGlow.rotation.y=-t*.3;coreGlow.scale.setScalar(1+Math.sin(t*4)*.12);blueHalo.rotation.x=t*.55;blueHalo.rotation.y=-t*.4;blueHalo.scale.setScalar(1+Math.sin(t*5)*.1);ring.scale.setScalar(mode==='collapse'?Math.max(.1,1-(now-modeSince)/1500):1+Math.sin(t*2)*.035);ring2.rotation.x=-t*.25;ring2.rotation.y=t*.2;core.rotation.x=t*.45;core.rotation.y=t*.6;core.scale.setScalar(mode==='domain'?1.3+Math.sin(t*5)*.18:1+Math.sin(t*5)*.12);gate.rotation.y=Math.sin(t*.4)*.08;gate.position.y=Math.sin(t*1.4)*.15;camera.position.x+=(handX*3-camera.position.x)*.02;camera.position.y+=(-handY*2-camera.position.y)*.02;camera.lookAt(0,0,0);renderer.render(scene,camera);}
+requestAnimationFrame(animate);
+function fingers(lm){const tips=[8,12,16,20],pips=[6,10,14,18];return tips.map((tip,i)=>{let dx=lm[tip].x-lm[pips[i]].x,dy=lm[tip].y-lm[pips[i]].y;return Math.hypot(dx,dy)>.09 && (lm[tip].y<lm[pips[i]].y-.015);});}
+function onResults(results){
+ const hands=results.multiHandLandmarks||[], now=performance.now();
+ handSeen=hands.length>0;
+ document.getElementById('tracking').textContent=handSeen?(hands.length>1?'2 HANDS':'1 HAND'):(now-lastHandAt<1500?'HOLDING EFFECT':'NO HAND');
+ if(!handSeen){
+   // Effects are latched: losing a landmark for a few frames never turns the effect off.
+   return;
+ }
+ lastHandAt=now;
+ const lm=hands[0], cx=lm[9].x, cy=lm[9].y;
+ handX=(.5-cx)*2;handY=(.5-cy)*2;
+ const dx=cx-lastHandX,dy=cy-lastHandY, speed=Math.hypot(dx,dy);
+ moveSpeed=speed;lastHandX=cx;lastHandY=cy;
+ const f=fingers(lm),count=f.filter(Boolean).length;
+ let gesture=null;
+ // Two-hand distance produces three distinct techniques, with hysteresis to avoid threshold chatter.
+ if(hands.length>1){
+   const p=hands[0][9],q=hands[1][9],dist=Math.hypot(p.x-q.x,p.y-q.y);
+   if(dist<.22)gesture='core';
+   else if(dist>.43)gesture='eclipse';
+   else gesture='prism';
+ }
+ // Deliberate fast movements trigger one-shot techniques only when a hand is clearly moving.
+ if(!gesture && speed>.075 && now-modeSince>900){
+   if(Math.abs(dx)>Math.abs(dy)*1.25) gesture='comet';
+   else if(dy<-.04) gesture='nova';
+   else if(dy>.04) gesture='vortex';
+ }
+ // Stable poses. Test specific finger combinations before broad finger counts.
+ if(!gesture){
+   if(count===0)gesture='collapse';
+   else if(f[1]&&f[2]&&!f[3]&&!f[4])gesture='ring';
+   else if(f[1]&&!f[2]&&!f[3]&&f[4])gesture='burst';
+   else if(f[0]&&f[1]&&count<=2)gesture='orbit';
+   else if(count===1&&f[1])gesture='void';
+   else if(count===2&&f[0])gesture='shield';
+   else if(count===3)gesture='lightning';
+   else if(count===4)gesture='phoenix';
+   else if(count===5)gesture='wave';
+ }
+ if(!gesture) return;
+ // Require a consistent pose for 300 ms, then lock it. No automatic idle state.
+ if(gesture!==stableGesture){stableGesture=gesture;stableSince=now;return;}
+ if(now-stableSince>=300 && gesture!==mode && now-modeSince>700){
+   setMode(gesture);
+ }
+}
+async function stopCamera(){
+ try{if(activeCamera&&typeof activeCamera.stop==='function')activeCamera.stop();}catch(_){}
+ try{if(activeHands&&typeof activeHands.close==='function')await activeHands.close();}catch(_){}
+ if(activeStream){activeStream.getTracks().forEach(track=>track.stop());activeStream=null;}
+ video.pause();video.srcObject=null;document.body.classList.remove('camera-active');activeCamera=null;activeHands=null;
+ document.getElementById('stopcamera').hidden=true;
+ document.getElementById('camstatus').textContent='CAMERA OFF';
+ document.getElementById('camdot').style.background='#ff405c';
+ document.getElementById('start').classList.remove('hidden');
+ document.getElementById('startstatus').textContent='Camera is off. Start it again only when you want to use hand tracking.';
+}
+async function start(){const status=document.getElementById('startstatus');try{
+ if(!window.isSecureContext || !navigator.mediaDevices?.getUserMedia)throw new Error('Camera needs HTTPS or localhost. Open this page from http://localhost, not directly as a file.');
+ // Request camera permission immediately from the user's click, before checking optional CDN libraries.
+ status.textContent='در حال درخواست اجازه دوربین...';
+ activeStream=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:640},height:{ideal:480}},audio:false});
+ video.srcObject=activeStream;await video.play();document.body.classList.add('camera-active');
+ if(!window.Hands||!window.Camera||!window.THREE){
+   throw new Error('اجازه دوربین داده شد، اما کتابخانه‌های لازم بارگذاری نشده‌اند. اینترنت را بررسی و صفحه را تازه‌سازی کن.');
+ }
+ activeHands=new Hands({locateFile:(file)=>`https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
+ activeHands.setOptions({maxNumHands:2,modelComplexity:1,minDetectionConfidence:.62,minTrackingConfidence:.55});activeHands.onResults(onResults);
+ activeCamera=new Camera(video,{onFrame:async()=>{if(activeHands&&video.readyState>=2)await activeHands.send({image:video});},width:640,height:480});await activeCamera.start();
+ document.getElementById('start').classList.add('hidden');document.getElementById('stopcamera').hidden=false;
+ document.getElementById('camstatus').textContent='CAMERA ONLINE';document.getElementById('camdot').style.background='#49ffb1';
+ }catch(e){
+ if(activeStream){activeStream.getTracks().forEach(track=>track.stop());activeStream=null;}
+ video.srcObject=null;document.body.classList.remove('camera-active');
+ const messages={
+  NotAllowedError:'اجازه دوربین رد شده یا مسدود است. کنار آدرس سایت روی آیکون قفل بزن، Site settings را باز کن و Camera را روی Allow بگذار؛ سپس صفحه را تازه‌سازی کن.',
+  NotFoundError:'دوربینی پیدا نشد. دوربین را وصل کن یا دوربین فعال دیگری انتخاب کن.',
+  NotReadableError:'دوربین در حال استفاده توسط برنامه دیگری است. Zoom، Teams، Discord و برنامه‌های مشابه را ببند.',
+  OverconstrainedError:'تنظیمات انتخاب‌شده برای این دوربین پشتیبانی نمی‌شود. دوربین را دوباره وصل کن.',
+  SecurityError:'مرورگر دسترسی دوربین را به‌دلیل سیاست امنیتی مسدود کرده است. از localhost یا HTTPS استفاده کن.'
+ };
+ status.textContent=(messages[e?.name]||((e?.message==='Camera needs HTTPS or localhost.')?'مرورگر در این حالت اجازه دوربین نمی‌دهد؛ از localhost یا HTTPS استفاده کن.':(e?.message==='Tracking library did not load. Check internet access and reload.'?'کتابخانه تشخیص دست بارگذاری نشده. اینترنت را بررسی و صفحه را تازه‌سازی کن.':(e?.message||'دوربین فعال نشد. تنظیمات Camera مرورگر را بررسی کن.'))));
+ }}
+document.getElementById('stopcamera').addEventListener('click',stopCamera);
+addEventListener('pagehide',()=>{if(activeStream)activeStream.getTracks().forEach(track=>track.stop());try{if(activeCamera)activeCamera.stop();}catch(_){}try{if(activeHands)activeHands.close();}catch(_){}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden && activeStream){stopCamera();document.getElementById('start').classList.remove('hidden');document.getElementById('startstatus').textContent='CAMERA PAUSED FOR PRIVACY';}});
+document.querySelectorAll('.gestureItem').forEach(el=>{el.setAttribute('role','button');el.setAttribute('tabindex','0');el.setAttribute('aria-label','Activate '+el.querySelector('b').textContent);const activate=()=>{setMode(el.dataset.mode);stableGesture=el.dataset.mode;stableSince=performance.now();};el.addEventListener('click',activate);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activate();}});});
+document.getElementById('enable').addEventListener('click',start);addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+})();
+
+</script></body></html>
